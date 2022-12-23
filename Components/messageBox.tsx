@@ -1,10 +1,10 @@
 import React from "react";
 import { MessageBoxProps } from "./types";
 
-function MessageBox({ Message }: MessageBoxProps) {
+function MessageBox({ message }: MessageBoxProps) {
   return (
     <div>
-      <div>Message</div>
+      <div>{message}</div>
     </div>
   );
 }
