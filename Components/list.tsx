@@ -9,7 +9,9 @@ function List({ listData, tableHead }: ListProps) {
           {tableHead
             .sort((a, b) => a.order - b.order)
             .map((item) => (
-              <th className="text-center px-5 py-2 border-b-2 border-gray-800">{item.title}</th>
+              <th className="text-center px-5 py-2 border-b-2 border-gray-800">
+                {item.title}
+              </th>
             ))}
         </tr>
       </thead>
@@ -17,7 +19,15 @@ function List({ listData, tableHead }: ListProps) {
         {listData.map((item: ListData) => (
           <tr>
             {tableHead.map((head) => (
-              <td className="text-center py-2 border-b">{`${item[head.title as keyof ListData]}`}</td>
+              <td
+                className={`text-center py-2 border-b font-bold ${
+                  item[head.title as keyof ListData] === true
+                    ? " text-green-800"
+                    : head.title === "corrected"
+                    ? "text-red-800"
+                    : "text-with"
+                }`}
+              >{`${item[head.title as keyof ListData]}`}</td>
             ))}
           </tr>
         ))}

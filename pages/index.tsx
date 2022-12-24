@@ -83,7 +83,7 @@ export default function Home() {
 
   return (
     <div className="w-full h-screen flex justify-center items-center  bg-gray-400">
-      <div className=" p-10 bg-gray-500 shadow-3xl rounded-xl">
+      <div className=" p-10 bg-gray-500 shadow-3xl rounded-xl  max-h-3/4 overflow-y-auto overflow-x-hidden">
         {message && <MessageBox message={message} correct={listData[listData.length - 1].corrected} />}
         <SearchBox
           searchInputValue={searchInputValue}
