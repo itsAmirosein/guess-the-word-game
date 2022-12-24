@@ -1,3 +1,5 @@
+import { ListData } from "../Components/types";
+
 export type InitialState = {
   searchInputValue: string;
   listData:ListData[],
@@ -9,8 +11,3 @@ export type ActionsType = {
   payload: any;
 };
 
-export type ListData={
-    guess:string,
-    matchingLetters:number,
-    corrected:boolean
-}
