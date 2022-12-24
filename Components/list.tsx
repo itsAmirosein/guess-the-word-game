@@ -14,10 +14,10 @@ function List({ listData, tableHead }: ListProps) {
         </tr>
       </thead>
       <tbody>
-        {listData.map((item: any, index) => (
+        {listData.map((item: ListData) => (
           <tr>
             {tableHead.map((head) => (
-              <td className="text-center py-2 border-b">{`${item[head.title]}`}</td>
+              <td className="text-center py-2 border-b">{`${item[head.title as keyof ListData]}`}</td>
             ))}
           </tr>
         ))}
