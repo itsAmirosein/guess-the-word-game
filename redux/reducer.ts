@@ -22,7 +22,7 @@ const ACTIONS = {
   [action.hanndleSearcInputValue]: hanndleSearcInputValue,
   [action.handleSubmitWord]: handleSubmitWord,
   [action.setCorrectedWord]: handleCorrectedWord,
-  [action.handleResetButton]:handleResetButton
+  [action.handleResetButton]: handleResetButton,
 };
 
 function hanndleSearcInputValue(
@@ -44,40 +44,40 @@ function handleCorrectedWord(state: InitialState, payload: any): InitialState {
 
 function handleSubmitWord(state: InitialState, payload: any): InitialState {
   let { correctedValue, searchInputValue } = state;
-  const copyListData = [...state.listData]
+  const copyListData = [...state.listData];
 
   let matchedLettersCount = 0;
   for (let i = 0; i < searchInputValue.length; i++) {
-      for (let j = 0; j < correctedValue.length; j++) {
-          if (
-              correctedValue.length > 0 &&
-              searchInputValue[i] === correctedValue[j]
+    for (let j = 0; j < correctedValue.length; j++) {
+      if (
+        correctedValue.length > 0 &&
+        searchInputValue[i] === correctedValue[j]
       ) {
-          matchedLettersCount++;
+        matchedLettersCount++;
         correctedValue =
-        correctedValue.substring(0, j) +
-        correctedValue.substring(++j, correctedValue.length);
+          correctedValue.substring(0, j) +
+          correctedValue.substring(++j, correctedValue.length);
+      }
     }
-    }
-}
+  }
 
   const listRecord: ListData = {
     guess: searchInputValue,
     corrected: state.correctedValue === state.searchInputValue,
     matchingLetters: matchedLettersCount,
-};
-copyListData.push(listRecord)
-return {
+  };
+  copyListData.push(listRecord);
+  return {
     ...state,
     listData: copyListData,
-};
+  };
 }
 
 function handleResetButton(state: InitialState, payload: any): InitialState {
   return {
     ...state,
-    searchInputValue:'',
-    listData:[],
-    correctedValue:payload
+    searchInputValue: "",
+    listData: [],
+    correctedValue: payload,
   };
 }
