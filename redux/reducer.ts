@@ -1,6 +1,7 @@
 import { Reducer } from "@reduxjs/toolkit";
-import { ActionsType, InitialState, ListData } from "./types";
+import { ActionsType, InitialState } from "./types";
 import { action } from "./actions";
+import { ListData } from "../Components/types";
 
 const initialState: InitialState = {
   searchInputValue: "",
@@ -21,6 +22,7 @@ const ACTIONS = {
   [action.hanndleSearcInputValue]: hanndleSearcInputValue,
   [action.handleSubmitWord]: handleSubmitWord,
   [action.setCorrectedWord]: handleCorrectedWord,
+  [action.handleResetButton]:handleResetButton
 };
 
 function hanndleSearcInputValue(
@@ -46,27 +48,36 @@ function handleSubmitWord(state: InitialState, payload: any): InitialState {
 
   let matchedLettersCount = 0;
   for (let i = 0; i < searchInputValue.length; i++) {
-    for (let j = 0; j < correctedValue.length; j++) {
-      if (
-        correctedValue.length > 0 &&
-        searchInputValue[i] === correctedValue[j]
+      for (let j = 0; j < correctedValue.length; j++) {
+          if (
+              correctedValue.length > 0 &&
+              searchInputValue[i] === correctedValue[j]
       ) {
-        matchedLettersCount++;
+          matchedLettersCount++;
         correctedValue =
-          correctedValue.substring(0, j) +
-          correctedValue.substring(++j, correctedValue.length);
-      }
+        correctedValue.substring(0, j) +
+        correctedValue.substring(++j, correctedValue.length);
     }
-  }
+    }
+}
 
   const listRecord: ListData = {
     guess: searchInputValue,
     corrected: state.correctedValue === state.searchInputValue,
     matchingLetters: matchedLettersCount,
-  };
-  copyListData.push(listRecord)
-  return {
+};
+copyListData.push(listRecord)
+return {
     ...state,
     listData: copyListData,
+};
+}
+
+function handleResetButton(state: InitialState, payload: any): InitialState {
+  return {
+    ...state,
+    searchInputValue:'',
+    listData:[],
+    correctedValue:payload
   };
 }

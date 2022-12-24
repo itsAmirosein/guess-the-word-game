@@ -1,17 +1,26 @@
 import React from "react";
+import { ListData, ListProps } from "./types";
 
-function List() {
+function List({ listData, tableHead }: ListProps) {
   return (
-    <table>
+    <table className="mt-8">
       <thead>
         <tr>
-          <th>head</th>
+          {tableHead
+            .sort((a, b) => a.order - b.order)
+            .map((item) => (
+              <th className="text-center px-5 py-2 border-b-2 border-gray-800">{item.title}</th>
+            ))}
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>body</td>
-        </tr>
+        {listData.map((item: any, index) => (
+          <tr>
+            {tableHead.map((head) => (
+              <td className="text-center py-2 border-b">{`${item[head.title]}`}</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );
